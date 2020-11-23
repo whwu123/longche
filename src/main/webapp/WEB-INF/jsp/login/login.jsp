@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>active4j-oa演示系统</title>
+    <title>龙车润滑油</title>
     <meta name="keywords" content="active4j-oa演示系统">
     <meta name="description" content="active4j-oa演示系统">
     <link rel="shortcut icon" href="static/bootstrap/image/favicon.ico"> 
@@ -22,9 +22,9 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h3 class="logo-name">YC</h3>
+                <h3 class="logo-name">LC</h3>
             </div>
-            <h3>active4j-oa演示系统</h3>
+            <h3>龙车润滑油</h3>
             <form class="form-horizontal m-t" id="signupForm" action="login" method="post">
                 <div class="form-group">
                     <input type="text" name="userName" id="userName" value="admin" class="form-control" placeholder="用户名" required="">
@@ -40,8 +40,8 @@
                 </div>
                 <button type="button" class="btn btn-primary block full-width m-b" onclick="doSubmit()">登 录</button>
                 
-                <p class="text-muted text-center"> <a href="https://github.com/yunchaoyun/active4j-oa">github</a> | <a href="https://gitee.com/active4j/active4j-oa">码云</a>
-                </p>
+                <!-- <p class="text-muted text-center"> <a href="https://github.com/yunchaoyun/active4j-oa">github</a> | <a href="https://gitee.com/active4j/active4j-oa">码云</a>
+                </p> -->
             </form>
         </div>
     </div>
