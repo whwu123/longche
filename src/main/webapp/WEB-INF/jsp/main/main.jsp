@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>龙车润滑油</title>
   <t:base type="default"></t:base>
    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
    <style type="text/css">
@@ -113,7 +114,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                    		 <p class="sysTitle">active4j-oa演示系统</p>
+                    		 <p class="sysTitle">龙车润滑油</p>
                         </div>
                     </li>
                     
