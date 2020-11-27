@@ -17,10 +17,10 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-						<t:formvalid action="sys/user/saveUser">
-							<input type="hidden" name="id" id="id" value="${user.id }">
+						<t:formvalid action="sales/saveSales">
+							<input type="hidden" name="id" id="id" value="${sales.id }">
 							<div class="form-group">
-                                <label class="col-sm-3 control-label">用户名*：</label>
+                                <label class="col-sm-3 control-label">姓名*：</label>
                                 <div class="col-sm-8">
                                     <input id="name" name="name" <c:if test="${not empty sales.id }">readonly="readonly"</c:if> minlength="2" maxlength="20" type="text" class="form-control" required="" value="${sales.name }">
                                 </div>
@@ -28,13 +28,13 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">联系电话*：</label>
                                 <div class="col-sm-8">
-                                    <input id="phone" name="phone" minlength="2" maxlength="10" type="text" class="form-control" required="" value="${sales.phone }">
+                                    <input id="phone" name="phone" minlength="2" maxlength="11" type="text" class="form-control" required="" value="${sales.phone }">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">地址：</label>
+                                <label class="col-sm-3 control-label">地址*：</label>
                                 <div class="col-sm-8">
-                                    <input id="returnAddress" name="returnAddress" type="text" class="form-control" value="${sales.returnAddress }">
+                                    <input id="returnAddress" name="returnAddress" type="text"  minlength="2" class="form-control" required="" value="${sales.returnAddress }">
                                 </div>
                             </div>
 						</t:formvalid>

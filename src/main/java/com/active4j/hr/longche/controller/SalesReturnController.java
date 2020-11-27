@@ -1,5 +1,6 @@
 package com.active4j.hr.longche.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.active4j.hr.core.annotation.Log;
+import com.active4j.hr.core.beanutil.MyBeanUtils;
 import com.active4j.hr.core.model.AjaxJson;
 import com.active4j.hr.core.model.LogType;
 import com.active4j.hr.core.query.QueryUtils;
@@ -97,13 +99,62 @@ public class SalesReturnController {
 		}else {
 			//编辑
 			salesReturnEntity = salesReturnService.getById(salesReturnEntity.getId());
+			
+			//salesReturnService.saveOrUpdate(salesReturnEntity);
 			view.addObject("sales", salesReturnEntity);
 		}
 		return view;
 	}
 	
-	
-	
+	@RequestMapping("/saveSales")
+	@ResponseBody
+	@Log(type = LogType.save, name = "保存退货地址信息", memo = "新增或编辑保存了退货地址信息")
+	public AjaxJson saveSales(HttpServletRequest req, SalesReturnEntity salesReturnEntity) {
+		AjaxJson j = new AjaxJson();
+		try {
+			if(StringUtils.isEmpty(salesReturnEntity.getName())) {
+				j.setSuccess(false);
+				j.setMsg("姓名不能为空");
+				return j;
+			}
+			
+			if(StringUtils.isEmpty(salesReturnEntity.getPhone())) {
+				j.setSuccess(false);
+				j.setMsg("联系电话为空");
+				return j;
+			}
+			
+			if(StringUtils.isEmpty(salesReturnEntity.getReturnAddress())) {
+				j.setSuccess(false);
+				j.setMsg("退货地址为空");
+				return j;
+			}
+			
+			if(StringUtils.isEmpty(salesReturnEntity.getId())) {
+				//新增保存
+				//状态
+				//salesReturnEntity.setVersions(1);
+				salesReturnEntity.setCreateDate(new Date());
+				salesReturnEntity.setUpdateDate(new Date());
+				salesReturnEntity.setState("1");
+				salesReturnService.save(salesReturnEntity);
+			}else {
+				//编辑保存
+				SalesReturnEntity tmp = salesReturnService.getById(salesReturnEntity.getId());
+				tmp.setUpdateDate(new Date());
+				MyBeanUtils.copyBeanNotNull2Bean(salesReturnEntity, tmp);
+				salesReturnService.saveOrUpdate(tmp);
+			}
+			
+		}catch(Exception e) {
+			log.error("保存用户信息报错，错误信息:" + e.getMessage());
+			j.setSuccess(false);
+			j.setMsg("保存用户错误");
+			e.printStackTrace();
+		}
+		
+		return j;
+	}
 	@RequestMapping("/del")
 	@ResponseBody
 	@Log(type = LogType.del, name = "删除退货地址", memo = "删除了退货地址信息")
