@@ -113,7 +113,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                    		 <p class="sysTitle">active4j-oa演示系统</p>
+                    		 <p class="sysTitle">龙车润滑油</p>
                         </div>
                     </li>
                     
