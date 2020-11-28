@@ -68,13 +68,13 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">商城名称 *</label>
                                 <div class="col-sm-8">
-                                    <input id="name" name="name" minlength="2" maxlength="20" type="text" class="form-control" required="" value="${mell.deptNo }">
+                                    <input id="name" name="name" minlength="2" maxlength="20" type="text" class="form-control" required="" value="${mell.name }">
                                 </div>
                             </div>
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">联系电话 *</label>
                                 <div class="col-sm-8">
-                                    <input id="phone" name="phone" minlength="2" maxlength="11" type="text" class="form-control" required="" value="${mell.name }">
+                                    <input id="phone" name="phone" minlength="2" maxlength="11" type="text" class="form-control" required="" value="${mell.phone }">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -89,12 +89,12 @@
                                      <input id="receivingTime" name="receivingTime" minlength="1" maxlength="3" type="number" class="form-control" required="" value="${mell.receivingTime }">
                                 </div>
                             </div>
-                            <div class="form-group">
+                           <%--  <div class="form-group">
                                 <label class="col-sm-3 control-label">售后时间 （天）*</label>
                                 <div class="col-sm-8">
                                     <input id="supportTime" name="supportTime" minlength="1" maxlength="3" type="number" class="form-control" required="" value="${mell.supportTime }">
                                 </div>
-                            </div>
+                            </div> --%>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">退货地址 *</label>
                                 <div class="col-sm-8">

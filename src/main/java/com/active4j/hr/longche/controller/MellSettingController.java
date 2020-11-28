@@ -35,8 +35,8 @@ public class MellSettingController {
 	public String list(Model model) {
 		MellSettingEntity mell = null;
 		List<MellSettingEntity> mells =  mellSettingService.list();
-		if(mells.size()>0) {
-			 mell = mells.get(0);
+		if( mells != null && mells.size()>0) {
+			 mell =  mells.get(0);
 		}else {
 			mell = new MellSettingEntity();
 		}
