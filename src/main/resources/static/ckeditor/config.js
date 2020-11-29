@@ -43,6 +43,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.filebrowserFlashBrowseUrl='static/ckfinder/ckfinder.html?type=Flash'
 	//config.filebrowserUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files'
 	//config.filebrowserFlashUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
-	config.filebrowserFlashUploadUrl='fileUploaderController/upload'
-	config.filebrowserUploadUrl="fileUploaderController/upload";
+	config.filebrowserFlashUploadUrl='../fileUploaderController/imgUpload'
+	config.filebrowserUploadUrl="../fileUploaderController/imgUpload";
 };

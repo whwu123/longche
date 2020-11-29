@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/fileUploaderController")
 public class FileUploaderController {
-	private File upload; // 文件
-	private String uploadContentType; // 文件类型
-	private String uploadFileName; // 文件名
+	//private File upload; // 文件
+	//private String uploadContentType; // 文件类型
+	//private String uploadFileName; // 文件名
  
 	/**
 	 * 图片上传
@@ -34,7 +33,7 @@ public class FileUploaderController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/imgUpload")
-	public String imgUpload(HttpServletResponse response,HttpServletRequest request) throws IOException {
+	public String imgUpload(HttpServletResponse response,HttpServletRequest request,@RequestParam("upload") MultipartFile upload,String uploadContentType) throws IOException {
  
 		// 获得response,request
 		
@@ -44,6 +43,7 @@ public class FileUploaderController {
 		// CKEditor提交的很重要的一个参数
 		String callback = request.getParameter("CKEditorFuncNum");
 		String expandedName = ""; // 文件扩展名
+		uploadContentType = upload.getContentType();
 		if (uploadContentType.equals("image/pjpeg")
 				|| uploadContentType.equals("image/jpeg")) {
 			// IE6上传jpg图片的headimageContentType是image/pjpeg，而IE9以及火狐上传的jpg图片是image/jpeg
@@ -63,15 +63,15 @@ public class FileUploaderController {
 			out.println("</script>");
 			return null;
 		}
-		if (upload.length() > 600 * 1024) {
+		if (upload.getSize() > 600 * 1024) {
 			out.println("<script type=\"text/javascript\">");
 			out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
 					+ ",''," + "'文件大小不得大于600k');");
 			out.println("</script>");
 			return null;
 		}
- 
-		InputStream is = new FileInputStream(upload);
+
+		InputStream is =upload.getInputStream();
 		//图片上传路径
 		String uploadPath = request.getRealPath("/img/uploadImg");
 		String fileName = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式随即命名
@@ -98,29 +98,4 @@ public class FileUploaderController {
 		return null;
 	}
  
-	public File getUpload() {
-		return upload;
-	}
- 
-	public void setUpload(File upload) {
-		this.upload = upload;
-	}
- 
-	public String getUploadContentType() {
-		return uploadContentType;
-	}
- 
-	public void setUploadContentType(String uploadContentType) {
-		this.uploadContentType = uploadContentType;
-	}
- 
-	public String getUploadFileName() {
-		return uploadFileName;
-	}
- 
-	public void setUploadFileName(String uploadFileName) {
-		this.uploadFileName = uploadFileName;
-	}
-
-
 }
