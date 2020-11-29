@@ -36,18 +36,18 @@
                                 <label class="col-sm-3 control-label">优惠券方式*：</label>
                                 <div class="col-sm-8">
                                     <select name="preferentialWay" class="form-control help-block m-b-none" aria-invalid="false" id="yhfs">
-	                                    <option value="1"  <c:if test="${coupon.preferentialWay==1}">selected="selected"</c:if> >有效时间</option>
 	                                    <option value="0"  <c:if test="${coupon.preferentialWay==0}">selected="selected"</c:if> >数量</option>
+	                                    <option value="1"  <c:if test="${coupon.preferentialWay==1}">selected="selected"</c:if> >有效时间</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group" id="yxts" >
+                            <div class="form-group" id="yxts" style="display: none">
                                 <label class="col-sm-3 control-label">有效天数*：</label>
                                 <div class="col-sm-8">
                                     <input id="validTime" name="validTime" type="text"  class="form-control" required="" value="${coupon.validTime }">
                                 </div>
                             </div>
-                            <div class="form-group" id="yhNumber" style="display: none">
+                            <div class="form-group" id="yhNumber" >
                                 <label class="col-sm-3 control-label">数量*：</label>
                                 <div class="col-sm-8">
                                     <input id="number" name="number" type="text"  class="form-control" required="" value="${coupon.number }">
