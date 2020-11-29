@@ -37,11 +37,12 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
 	//上传图片
-	//config.filebrowserImageUploadUrl = "fileUploaderController.do?ckUploadImages";
 	config.filebrowserImageBrowseUrl='static/ckfinder/ckfinder.html?type=Images'
 	config.filebrowserBrowseUrl='static/ckfinder/ckfinder.html'
 	config.filebrowserImageBrowseUrl='static/ckfinder/ckfinder.html?type=Images'
 	config.filebrowserFlashBrowseUrl='static/ckfinder/ckfinder.html?type=Flash'
-	config.filebrowserUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files'
-	config.filebrowserFlashUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
+	//config.filebrowserUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files'
+	//config.filebrowserFlashUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
+	config.filebrowserFlashUploadUrl='fileUploaderController/upload'
+	config.filebrowserUploadUrl="fileUploaderController/upload";
 };
