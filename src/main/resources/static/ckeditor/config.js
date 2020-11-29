@@ -39,10 +39,12 @@ CKEDITOR.editorConfig = function( config ) {
 	//上传图片
 	config.filebrowserImageBrowseUrl='static/ckfinder/ckfinder.html?type=Images'
 	config.filebrowserBrowseUrl='static/ckfinder/ckfinder.html'
-	config.filebrowserImageBrowseUrl='static/ckfinder/ckfinder.html?type=Images'
 	config.filebrowserFlashBrowseUrl='static/ckfinder/ckfinder.html?type=Flash'
 	//config.filebrowserUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files'
 	//config.filebrowserFlashUploadUrl='static/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
 	config.filebrowserFlashUploadUrl='../fileUploaderController/imgUpload'
 	config.filebrowserUploadUrl="../fileUploaderController/imgUpload";
+	config.image_previewText=' ';     //预览区域显示内容
+	//config.removeDialogTabs = 'image:advanced;image:Upload;image:Link';
+	config.removeDialogTabs = 'image:advanced;image:Link';
 };
