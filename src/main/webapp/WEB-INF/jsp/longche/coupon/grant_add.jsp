@@ -30,7 +30,7 @@
                                 <div class="col-sm-8">
                                     <select name="disbursement" class="form-control help-block m-b-none" aria-invalid="false" id="disbursement">
 	                                    <option value="0"  <c:if test="${grant.disbursement==0}">selected="selected"</c:if> >注册新用户</option>
-	                                    <option value="1"  <c:if test="${grant.disbursement==0}">selected="selected"</c:if> >购买并付款</option>
+	                                    <option value="1"  <c:if test="${grant.disbursement==1}">selected="selected"</c:if> >购买并付款</option>
                                     </select>
                                 </div>
                             </div>

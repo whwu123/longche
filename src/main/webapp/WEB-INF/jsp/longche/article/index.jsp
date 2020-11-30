@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
+<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <script src="<%=basePath%>static/ckeditor/ckeditor.js"></script>
+<script src="<%=basePath%>static/ckeditor/ckeditor.js"></script>
 </head>
 <body>
  		<form>
