@@ -42,10 +42,15 @@ import lombok.extern.slf4j.Slf4j;
 public class ArticleController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String index(Model model) {
 		
 		return "longche/article/index";
 	}
 
+	@RequestMapping(value = "/lisst", method = RequestMethod.GET)
+	public String list(Model model) {
+		
+		return "longche/article/list";
+	}
 
 }
