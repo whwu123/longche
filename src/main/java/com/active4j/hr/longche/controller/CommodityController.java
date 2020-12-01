@@ -49,7 +49,7 @@ public class CommodityController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		
-		return "longche/commodity/type_list";
+		return "longche/commodity/list";
 	}
 
 	/**
