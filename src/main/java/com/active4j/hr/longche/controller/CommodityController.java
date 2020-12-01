@@ -21,8 +21,10 @@ import com.active4j.hr.core.shiro.ShiroUtils;
 import com.active4j.hr.core.util.ResponseUtil;
 import com.active4j.hr.core.web.tag.model.DataGrid;
 import com.active4j.hr.longche.entity.ArticleEntity;
+import com.active4j.hr.longche.entity.CommodityEntity;
 import com.active4j.hr.longche.entity.CommodityTypeEntity;
 import com.active4j.hr.longche.service.ArticleService;
+import com.active4j.hr.longche.service.CommodityService;
 import com.active4j.hr.longche.service.CommodityTypeService;
 import com.active4j.hr.system.model.ActiveUser;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -32,11 +34,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/commodityType")
-public class CommodityTypeController {
+@RequestMapping("/commodity")
+public class CommodityController {
 	
 	@Autowired
-	private CommodityTypeService commodityTypeService;
+	private CommodityService commodityService;
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -59,12 +61,12 @@ public class CommodityTypeController {
 	 * @time 2020年1月25日 下午9:46:12
 	 */
 	@RequestMapping("/datagrid")
-	public void datagrid(CommodityTypeEntity commodityTypeEntity, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+	public void datagrid(CommodityEntity commodityEntity, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		//拼接查询条件
-		QueryWrapper<CommodityTypeEntity> queryWrapper = QueryUtils.installQueryWrapper(commodityTypeEntity, request.getParameterMap(), dataGrid);
+		QueryWrapper<CommodityEntity> queryWrapper = QueryUtils.installQueryWrapper(commodityEntity, request.getParameterMap(), dataGrid);
 		
 		//执行查询
-		IPage<CommodityTypeEntity> lstResult = commodityTypeService.page(new Page<CommodityTypeEntity>(dataGrid.getPage(), dataGrid.getRows()), queryWrapper);
+		IPage<CommodityEntity> lstResult = commodityService.page(new Page<CommodityEntity>(dataGrid.getPage(), dataGrid.getRows()), queryWrapper);
 		
 		//输出结果
 		ResponseUtil.writeJson(response, dataGrid, lstResult);
@@ -72,26 +74,26 @@ public class CommodityTypeController {
 	}
 	
 	@RequestMapping("/addorupdate")
-	public ModelAndView addorupdate(CommodityTypeEntity commodityTypeEntity, HttpServletRequest req) {
+	public ModelAndView addorupdate(CommodityEntity commodityEntity, HttpServletRequest req) {
 		ModelAndView view = new ModelAndView("longche/commodity/type_add");
 		//List<ArticleEntity> list = articleService.list();
 		//view.addObject("list", list);
-		if(StringUtils.isEmpty(commodityTypeEntity.getId())) {
+		if(StringUtils.isEmpty(commodityEntity.getId())) {
 			//新增
-			commodityTypeEntity = new CommodityTypeEntity();
-			commodityTypeEntity.setState(1);
-			view.addObject("commodityType", commodityTypeEntity);
+			commodityEntity = new CommodityEntity();
+			commodityEntity.setState(1);
+			view.addObject("commodity", commodityEntity);
 		}else {
-			commodityTypeEntity = commodityTypeService.getById(commodityTypeEntity.getId());
-			view.addObject("commodityType", commodityTypeEntity);
+			commodityEntity = commodityService.getById(commodityEntity.getId());
+			view.addObject("commodity", commodityEntity);
 		}
 		return view;
 	}
 	
 	@RequestMapping("/save")
 	@ResponseBody
-	@Log(type = LogType.save, name = "保存商品类型信息", memo = "新增或编辑商品类型信息")
-	public AjaxJson saveSales(HttpServletRequest req, CommodityTypeEntity commodityTypeEntity) {
+	@Log(type = LogType.save, name = "保存商品信息", memo = "新增或编辑商品信息")
+	public AjaxJson saveSales(HttpServletRequest req, CommodityEntity commodityEntity) {
 		AjaxJson j = new AjaxJson();
 		try {
 			/*if(StringUtils.isEmpty(couponEntity.getName())) {
@@ -101,26 +103,26 @@ public class CommodityTypeController {
 			}*/
 			
 			
-			if(StringUtils.isEmpty(commodityTypeEntity.getId())) {
+			if(StringUtils.isEmpty(commodityEntity.getId())) {
 				//新增保存
 				//状态
 				//salesReturnEntity.setVersions(1);
-				commodityTypeEntity.setCreateDate(new Date());
-				commodityTypeEntity.setUpdateDate(new Date());
-				commodityTypeEntity.setState(1);
-				commodityTypeService.save(commodityTypeEntity);
+				commodityEntity.setCreateDate(new Date());
+				commodityEntity.setUpdateDate(new Date());
+				commodityEntity.setState(1);
+				commodityService.save(commodityEntity);
 			}else {
 				//编辑保存
-				CommodityTypeEntity tmp = commodityTypeService.getById(commodityTypeEntity.getId());
+				CommodityEntity tmp = commodityService.getById(commodityEntity.getId());
 				tmp.setUpdateDate(new Date());
-				MyBeanUtils.copyBeanNotNull2Bean(commodityTypeEntity, tmp);
-				commodityTypeService.saveOrUpdate(tmp);
+				MyBeanUtils.copyBeanNotNull2Bean(commodityEntity, tmp);
+				commodityService.saveOrUpdate(tmp);
 			}
 			
 		}catch(Exception e) {
-			log.error("保存商品类型信息报错，错误信息:" + e.getMessage());
+			log.error("保存商品信息报错，错误信息:" + e.getMessage());
 			j.setSuccess(false);
-			j.setMsg("保存商品类型错误");
+			j.setMsg("保存商品错误");
 			e.printStackTrace();
 		}
 		
@@ -129,22 +131,22 @@ public class CommodityTypeController {
 	
 	@RequestMapping("/del")
 	@ResponseBody
-	@Log(type = LogType.del, name = "删除商品类型信息", memo = "删除了商品类型信息")
+	@Log(type = LogType.del, name = "删除商品信息", memo = "删除了商品信息")
 	public AjaxJson del(String id, HttpServletRequest req) {
 		AjaxJson j = new AjaxJson();
 		try {
 			if(StringUtils.isEmpty(id)) {
 				j.setSuccess(false);
-				j.setMsg("请选择需要删除的商品类型");
+				j.setMsg("请选择需要删除的商品");
 				return j;
 			}
 			ActiveUser user = ShiroUtils.getSessionUser();
-			commodityTypeService.removeById(id);
-			log.info("用户：" + user.getUserName() + "删除了id为：" + id + "的商品类型信息");
+			commodityService.removeById(id);
+			log.info("用户：" + user.getUserName() + "删除了id为：" + id + "的商品信息");
 		}catch(Exception e) {
-			log.error("删除商品类型信息报错，错误信息：{}", e.getMessage());
+			log.error("删除商品信息报错，错误信息：{}", e.getMessage());
 			j.setSuccess(false);
-			j.setMsg("删除商品类型信息错误");
+			j.setMsg("删除商品信息错误");
 			e.printStackTrace();
 		}
 		return j;

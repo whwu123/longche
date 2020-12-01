@@ -25,17 +25,14 @@
 
 
 	<!-- 脚本部分 -->
-	<t:datagrid actionUrl="article/datagrid" tableContentId="jqGrid_wrapper" searchGroupId="searchGroupId" fit="true" caption="文章管理" name="table_list_2" pageSize="20" sortName="createDate" sortOrder="desc">
+	<t:datagrid actionUrl="commodityType/datagrid" tableContentId="jqGrid_wrapper" searchGroupId="searchGroupId" fit="true" caption="类型管理" name="table_list_2" pageSize="20" sortName="createDate" sortOrder="desc">
 		<t:dgCol name="id" label="编号" hidden="true" key="true" width="20"></t:dgCol>
-		<t:dgCol name="name" label="标题"  ></t:dgCol>
-		<t:dgCol name="address" label="地址" width="90"></t:dgCol>
-		<t:dgCol name="phone" label="联系方式" width="90"></t:dgCol>
-		<t:dgCol name="type" label="类别" width="90" replace="公司简介_1,分销简介_0"></t:dgCol>
-		<t:dgCol name="state" label="状态" replace="正常_1,禁用_0" width="60"></t:dgCol>
+		<t:dgCol name="name" label="名称"  width="150"></t:dgCol>
+		<t:dgCol name="state" label="状态" replace="正常_1,禁用_0" width="90"></t:dgCol>
 		<t:dgCol name="opt" label="操作" width="100"></t:dgCol>
-		<t:dgDelOpt label="删除" url="article/del?id={id}" operationCode="sys:user:del"/>
-		<t:dgToolBar url="article/addorupdate" type="add" width="60%" height="80%" operationCode="sys:user:add"></t:dgToolBar>
-		<t:dgToolBar url="article/addorupdate" type="edit" width="60%" height="80%" operationCode="sys:user:edit"></t:dgToolBar>
+		<t:dgDelOpt label="删除" url="commodityType/del?id={id}" operationCode="sys:user:del"/>
+		<t:dgToolBar url="commodityType/addorupdate" type="add" width="50%" height="50%" operationCode="sys:user:add"></t:dgToolBar>
+		<t:dgToolBar url="commodityType/addorupdate" type="edit" width="50%" height="50%" operationCode="sys:user:edit"></t:dgToolBar>
 	</t:datagrid>
 <script type="text/javascript">
 		
