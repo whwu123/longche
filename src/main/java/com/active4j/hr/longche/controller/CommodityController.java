@@ -75,7 +75,7 @@ public class CommodityController {
 	
 	@RequestMapping("/addorupdate")
 	public ModelAndView addorupdate(CommodityEntity commodityEntity, HttpServletRequest req) {
-		ModelAndView view = new ModelAndView("longche/commodity/type_add");
+		ModelAndView view = new ModelAndView("longche/commodity/add");
 		//List<ArticleEntity> list = articleService.list();
 		//view.addObject("list", list);
 		if(StringUtils.isEmpty(commodityEntity.getId())) {

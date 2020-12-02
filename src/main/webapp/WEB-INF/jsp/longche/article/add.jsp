@@ -45,7 +45,7 @@
                                     <input id="address" name="address" type="text"  minlength="2" class="form-control"   value="${article.address }">
                                 </div>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">内容：</label>
                                 <div class="col-sm-8">
                                 	<input type="hidden" id="content" name="content" value="${article.content }">

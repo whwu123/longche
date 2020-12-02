@@ -36,8 +36,8 @@
 		<t:dgCol name="name" label="已出售量"  width="60"></t:dgCol>
 		<t:dgCol name="opt" label="操作" width="100"></t:dgCol>
 		<t:dgDelOpt label="删除" url="commodity/del?id={id}" operationCode="sys:user:del"/>
-		<t:dgToolBar url="commodity/addorupdate" type="add" width="50%" height="50%" operationCode="sys:user:add"></t:dgToolBar>
-		<t:dgToolBar url="commodity/addorupdate" type="edit" width="50%" height="50%" operationCode="sys:user:edit"></t:dgToolBar>
+		<t:dgToolBar url="commodity/addorupdate" type="add" width="60%" height="90%" operationCode="sys:user:add"></t:dgToolBar>
+		<t:dgToolBar url="commodity/addorupdate" type="edit" width="60%" height="90%" operationCode="sys:user:edit"></t:dgToolBar>
 	</t:datagrid>
 <script type="text/javascript">
 		
