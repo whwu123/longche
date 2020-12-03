@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/webuploader.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/style.css">
 <script src="<%=basePath%>static/webuploader/webuploader.js"></script>
-<script src="<%=basePath%>static/webuploader/upload.js"></script>
+<%-- <script src="<%=basePath%>static/webuploader/upload.js"></script> --%>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -62,7 +62,7 @@
 								            <div id="uploader">
 								                <div class="queueList">
 								                    <div id="dndArea" class="placeholder">
-								                        <div id="filePicker"></div>
+								                        <div id="filePicker2"></div>
 								                        <p>或将照片拖到这里，单次最多可选10张</p>
 								                    </div>
 								                </div>
@@ -158,8 +158,10 @@
     	    // 选择文件的按钮。可选。
     	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
     	    pick: '#filePicker',
-    	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-    	    //resize: false
+    	    //限制只能上传一个文件
+            fileNumLimit: 1,
+             // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
     	    accept: {
     	        title: 'Images',
     	        extensions: 'gif,jpg,jpeg,bmp,png',
@@ -217,6 +219,45 @@
        uploader.on( 'uploadComplete', function( file ) {
            $( '#'+file.id ).find('.progress').remove();
        });
+       
+       // 实例化
+       /*var uploader2 =  WebUploader.create({
+           pick: {
+               id: '#filePicker2',
+               label: '点击选择图片'
+           },
+           formData: {
+               uid: 123
+           },
+        
+      	   // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+      	   resize: false,
+           dnd: '#uploader .queueList',
+           paste: '#uploader',
+           swf: BASE_URL + 'static/webuploader/Uploader.swf',
+           chunked: false,
+           chunkSize: 512 * 1024,
+           server: BASE_URL + 'fileUploaderController/fileupload',
+           accept: {
+      	        title: 'Images',
+      	        extensions: 'gif,jpg,jpeg,bmp,png',
+      	        mimeTypes: 'image/*'
+      	    },
+           // runtimeOrder: 'flash',
+
+           // accept: {
+           //     title: 'Images',
+           //     extensions: 'gif,jpg,jpeg,bmp,png',
+           //     mimeTypes: 'image/*'
+           // },
+
+           // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
+           disableGlobalDnd: true,
+           fileNumLimit: 300,
+           fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+           fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+       });*/
+    
     </script>
     
 </html>
