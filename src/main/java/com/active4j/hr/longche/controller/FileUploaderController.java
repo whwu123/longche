@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSONObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -96,6 +99,51 @@ public class FileUploaderController {
 				+ ",'" + request.getContextPath() + "/img/uploadImg/" + fileName + "','')");
 		out.println("</script>");
 		return null;
+	}
+	
+	@RequestMapping("/fileupload")
+	@ResponseBody
+	public String fileupload(HttpServletResponse response,HttpServletRequest request,@RequestParam("file") MultipartFile upload) throws Exception {
+		JSONObject json = new JSONObject();
+		String expandedName = ""; // 文件扩展名
+		String uploadContentType = upload.getContentType();
+		if (uploadContentType.equals("image/pjpeg")
+				|| uploadContentType.equals("image/jpeg")) {
+			expandedName = ".jpg";
+		} else if (uploadContentType.equals("image/png")
+				|| uploadContentType.equals("image/x-png")) {
+			expandedName = ".png";
+		} else if (uploadContentType.equals("image/gif")) {
+			expandedName = ".gif";
+		} else if (uploadContentType.equals("image/bmp")) {
+			expandedName = ".bmp";
+		} else {
+			json.put("msg", "图片上传格式错误");
+			return json.toString();
+		}
+		InputStream is =upload.getInputStream();
+		//图片上传路径
+		String uploadPath = request.getRealPath("/commodityImg/uploadImg");
+		String fileName = java.util.UUID.randomUUID().toString(); // 采用时间+UUID的方式随即命名
+		fileName += expandedName;
+		File file = new File(uploadPath);
+		if (!file.exists()) { // 如果路径不存在，创建
+			file.mkdirs();
+		}
+		File toFile = new File(uploadPath, fileName);
+		OutputStream os = new FileOutputStream(toFile);
+		byte[] buffer = new byte[1024];
+		int length = 0;
+		while ((length = is.read(buffer)) > 0) {
+			os.write(buffer, 0, length);
+		}
+		is.close();
+		os.close();
+		
+		String imgPath =  request.getContextPath() + "/commodityImg/uploadImg/" + fileName;
+		json.put("msg", "图片上传成功");
+		json.put("filePath", imgPath);
+		return json.toString();
 	}
  
 }
