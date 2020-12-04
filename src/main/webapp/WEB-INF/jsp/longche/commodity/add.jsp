@@ -149,7 +149,7 @@
        function splitSublimted(str) {
     		var strs= new Array(); //创建一个数组
     		var ydms='';
-    		strs=str.split("|"); //以“|”为标志分割
+    		strs=str.split(","); //以“|”为标志分割
     		for (i=0;i<strs.length ;i++ ) { 
     			ydms=strs[0]; //取值
     		} 
@@ -183,7 +183,7 @@
    	  	 var addId = $("#id").val();
    	  	 if(addId !=null && addId != "" ){
    	  	 	//需要编辑的图片列表
-   			var picList = pictureListValue.split("|");
+   			var picList = pictureListValue.split(",");
    			$.each(picList, function(index,item){
    			  	getFileObject(item, function (fileObject) {
    			    var wuFile = new WebUploader.Lib.File(WebUploader.guid('rt_'),fileObject);
@@ -199,7 +199,7 @@
 	   		//console.log(arr); 
 	   		
 	   		var picList = new Array();
-  	    	picList = pictureListValue.split("|");
+  	    	picList = pictureListValue.split(",");
   	    	var hah =picList[1];
   	    	var str = file.id
   	        var falg = str.substr(str.length-1,1)
