@@ -584,5 +584,5 @@
         $upload.addClass( 'state-' + state );
         updateTotalProgress();
     });
-
+    	
 })( jQuery );
