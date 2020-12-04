@@ -55,16 +55,16 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">商品图片*：</label>
                                 <div class="col-sm-8">
-                                    <input id="picture" name="picture"  type="text" class="form-control"  value="${commodity.picture }">
+                                    <input id="picture" name="picture"  type="hidden" class="form-control"  value="${commodity.picture }">
                                     <div id="wrapper">
-								        <div id="container">
+								        <div id="container" style="margin-top: 0px;">
 								            <!--头部，相册选择和格式选择-->
 								
 								            <div id="uploader">
 								                <div class="queueList">
 								                    <div id="dndArea" class="placeholder">
 								                        <div id="filePicker"></div>
-								                        <p>或将照片拖到这里，单次最多可选10张</p>
+								                        <p>或将照片拖到这里，单次最多可选5张</p>
 								                    </div>
 								                </div>
 								                <div class="statusBar" style="display:none;">
