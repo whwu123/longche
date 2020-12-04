@@ -212,6 +212,7 @@
 
         // 当有文件添加进来时执行，负责view的创建
         function addFile( file ) {
+        	
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
@@ -219,7 +220,7 @@
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
-                    '<span class="cancel">删除</span>' +
+                    '<span class="cancel" οnclick="remove(\''+file.id+'\')">删除</span>' +
                     '<span class="rotateRight">向右旋转</span>' +
                     '<span class="rotateLeft">向左旋转</span></div>').appendTo( $li ),
                 $prgress = $li.find('p.progress span'),
@@ -324,7 +325,9 @@
 
                 switch ( index ) {
                     case 0:
+                    	
                         uploader.removeFile( file );
+                        
                         return;
 
                     case 1:
@@ -373,10 +376,11 @@
         // 负责view的销毁
         function removeFile( file ) {
             var $li = $('#'+file.id);
-
+           
             delete percentages[ file.id ];
             updateTotalProgress();
             $li.off().find('.file-panel').off().end().remove();
+            removeLongche(file);
         }
 
         function updateTotalProgress() {
@@ -407,7 +411,7 @@
             } else if ( state === 'confirm' ) {
                 stats = uploader.getStats();
                 if ( stats.uploadFailNum ) {
-                    text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
+                    text = '已成功上传' + stats.successNum+ '张照片，'+
                         stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
                 }
 

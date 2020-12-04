@@ -145,6 +145,7 @@
     	  // alert(content)
     	   return true;
        }
+       
        function splitSublimted(str) {
     		var strs= new Array(); //创建一个数组
     		var ydms='';
@@ -165,7 +166,7 @@
 	   	   });
 	   	   xhr.send();
 	   	 };
-
+	   
 	   	 var blobToFile = function (blob, name) {
 		   	   blob.lastModifiedDate = new Date();
 		   	   blob.name = name;
@@ -192,7 +193,32 @@
    			});
    	  		 
    	  	 }
-       
+   		function removeLongche(file){
+	   		var arr = ['a','b','c','d']; 
+	   		arr.splice(1,1); 
+	   		//console.log(arr); 
+	   		
+	   		var picList = new Array();
+  	    	picList = pictureListValue.split("|");
+  	    	var hah =picList[1];
+  	    	var str = file.id
+  	        var falg = str.substr(str.length-1,1)
+  	        if(falg == 0){
+  	        	picList.splice(1,1); 
+  	        }else if(falg == 1 ){
+  	        	picList.splice(2,1); 
+  	        }else if(falg == 2 ){
+  	        	picList.splice(3,1); 
+  	        }else if(falg == 3 ){
+  	        	picList.splice(4,1); 
+  	        }else if(falg == 4 ){
+  	        	picList.splice(5,1); 
+  	        }
+  	    	//alert(picList);
+  	    	$("#picture").val(picList);
+  	        
+  	    
+  	    }
     </script>
     <script src="<%=basePath%>static/webuploader/upload.js"></script>
 </html>
