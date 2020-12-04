@@ -4,7 +4,7 @@
         var $wrap = $('#uploader'),
 
             // 图片容器
-            $queue = $( '<ul class="filelist2"></ul>' )
+            $queue = $( '<ul class="filelist"></ul>' )
                 .appendTo( $wrap.find( '.queueList' ) ),
 
             // 状态栏，包括进度和控制按钮
@@ -140,7 +140,7 @@
         // 实例化
         uploader = WebUploader.create({
             pick: {
-                id: '#filePicker2',
+                id: '#filePicker',
                 label: '点击选择图片'
             },
             formData: {
@@ -148,10 +148,10 @@
             },
             dnd: '#uploader .queueList',
             paste: '#uploader',
-            swf: '../../dist/Uploader.swf',
+            swf: BASE_URL + 'static/webuploader/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '../../server/fileupload.php',
+            server: BASE_URL + 'fileUploaderController/fileupload',
             // runtimeOrder: 'flash',
 
             // accept: {
@@ -477,6 +477,7 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
+                    	//console.log(stats)
                         alert( '上传成功' );
                     } else {
                         // 没有成功的图片，重设
@@ -498,7 +499,7 @@
             updateTotalProgress();
         };
 
-        uploader.onFileQueued = function( file ) {
+        uploader.onFileQueued = function( file,response) {
             fileCount++;
             fileSize += file.size;
 
@@ -542,7 +543,18 @@
 
             }
         });
-
+        uploader.on( 'uploadSuccess', function( file,response) {
+           // $( '#'+file.id ).addClass('upload-state-done');
+           var pictureValue = $("#picture").val();
+           alert("上传成功了:"+response.filePath)
+           if(pictureValue!=null || pictureValue!=""){
+        	   pictureValue = pictureValue+"|"+response.filePath;
+           }else{
+        	   pictureValue = response.filePath;
+           }
+           $("#picture").val(pictureValue);
+            
+        });
         uploader.onError = function( code ) {
             alert( 'Eroor: ' + code );
         };

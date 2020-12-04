@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/webuploader.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/style.css">
 <script src="<%=basePath%>static/webuploader/webuploader.js"></script>
-<%-- <script src="<%=basePath%>static/webuploader/upload.js"></script> --%>
+
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             
-                             <div class="form-group">
+                            <%-- <div class="form-group">
                                 <label class="col-sm-3 control-label">商品缩略图*：</label>
                                 <div class="col-sm-8">
                                     <input id="thumbnail" name="thumbnail"  type="hidden"  value="${commodity.thumbnail }"> 
@@ -50,19 +50,20 @@
 									    <div id="filePicker">选择图片</div>
 									</div>
                                 </div>
-                            </div>
+                            </div> --%>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">商品图片*：</label>
                                 <div class="col-sm-8">
-                                    <input id="picture" name="picture"  type="hidden" class="form-control"  value="${commodity.picture }">
+                                    <input id="picture" name="picture"  type="text" class="form-control"  value="${commodity.picture }">
                                     <div id="wrapper">
 								        <div id="container">
 								            <!--头部，相册选择和格式选择-->
+								
 								            <div id="uploader">
 								                <div class="queueList">
 								                    <div id="dndArea" class="placeholder">
-								                        <div id="filePicker2"></div>
+								                        <div id="filePicker"></div>
 								                        <p>或将照片拖到这里，单次最多可选10张</p>
 								                    </div>
 								                </div>
@@ -136,6 +137,7 @@
 		</div>
 	</div>
 </body>
+
 <script>
        function beforeSubmit(){
     	   var content = CKEDITOR.instances.editor1.getData(); //获取editor1的值
@@ -143,7 +145,9 @@
     	  // alert(content)
     	   return true;
        }
-       var $list=$("#fileList");
+
+   	  var BASE_URL = "<%=basePath%>";
+      <%--  var $list=$("#fileList");
 	   var BASE_URL = "<%=basePath%>";
 	   var thumbnailWidth = 150;
 	   var thumbnailHeight = 150;
@@ -167,6 +171,10 @@
     	        extensions: 'gif,jpg,jpeg,bmp,png',
     	        mimeTypes: 'image/*'
     	    }
+	       disableGlobalDnd: true,
+	       fileNumLimit: 300,
+	       fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+	       fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
     	});
        
        uploader.on( 'fileQueued', function( file ) {
@@ -218,47 +226,8 @@
        // 完成上传完了，成功或者失败，先删除进度条。
        uploader.on( 'uploadComplete', function( file ) {
            $( '#'+file.id ).find('.progress').remove();
-       });
-       
-       // 实例化
-       /*var uploader2 =  WebUploader.create({
-           pick: {
-               id: '#filePicker2',
-               label: '点击选择图片'
-           },
-           formData: {
-               uid: 123
-           },
-        
-      	   // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-      	   resize: false,
-           dnd: '#uploader .queueList',
-           paste: '#uploader',
-           swf: BASE_URL + 'static/webuploader/Uploader.swf',
-           chunked: false,
-           chunkSize: 512 * 1024,
-           server: BASE_URL + 'fileUploaderController/fileupload',
-           accept: {
-      	        title: 'Images',
-      	        extensions: 'gif,jpg,jpeg,bmp,png',
-      	        mimeTypes: 'image/*'
-      	    },
-           // runtimeOrder: 'flash',
-
-           // accept: {
-           //     title: 'Images',
-           //     extensions: 'gif,jpg,jpeg,bmp,png',
-           //     mimeTypes: 'image/*'
-           // },
-
-           // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
-           disableGlobalDnd: true,
-           fileNumLimit: 300,
-           fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-           fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
-       });*/
-    
+       }); --%>
     </script>
-    
+    <script src="<%=basePath%>static/webuploader/upload.js"></script>
 </html>
 
