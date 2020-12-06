@@ -280,6 +280,7 @@
             }
 
             file.on('statuschange', function( cur, prev ) {
+            	
                 if ( prev === 'progress' ) {
                     $prgress.hide().width(0);
                 } else if ( prev === 'queued' ) {
@@ -374,11 +375,10 @@
         // 负责view的销毁
         function removeFile( file ) {
             var $li = $('#'+file.id);
-           
             delete percentages[ file.id ];
             updateTotalProgress();
             $li.off().find('.file-panel').off().end().remove();
-            removeLongche(file);
+            $("#pictureFlag").val(1);
         }
 
         function updateTotalProgress() {
@@ -428,6 +428,7 @@
         }
 
         function setState( val ) {
+        	
             var file, stats;
 
             if ( val === state ) {
@@ -444,6 +445,7 @@
                     $queue.hide();
                     $statusBar.addClass( 'element-invisible' );
                     uploader.refresh();
+                    
                     break;
 
                 case 'ready':
@@ -452,6 +454,7 @@
                     $queue.show();
                     $statusBar.removeClass('element-invisible');
                     uploader.refresh();
+                    
                     break;
 
                 case 'uploading':
@@ -480,7 +483,9 @@
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
                     	//console.log(stats)
-                        alert( '上传成功' );
+                    	$("#pictureFlag").val(0);
+                        //alert( '上传成功' );
+                        toastr.success("上传成功");
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';

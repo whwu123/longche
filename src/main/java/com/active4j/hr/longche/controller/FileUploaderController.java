@@ -143,6 +143,7 @@ public class FileUploaderController {
 		String imgPath =  request.getContextPath() + "/commodityImg/uploadImg/" + fileName;
 		json.put("msg", "图片上传成功");
 		json.put("filePath", imgPath);
+		json.put("code", 0);
 		return json.toString();
 	}
  

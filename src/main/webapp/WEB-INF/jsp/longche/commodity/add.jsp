@@ -8,7 +8,36 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/webuploader.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>static/webuploader/style.css">
 <script src="<%=basePath%>static/webuploader/webuploader.js"></script>
+<style type="text/css">
 
+.file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+
+</style>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -18,6 +47,7 @@
 					<div class="ibox-content">
 						<t:formvalid action="commodity/save" beforeSubmit="beforeSubmit">
 							<input type="hidden" name="id" id="id" value="${commodity.id }">
+							<input type="hidden" id="state" name="state" value="${commodity.state }">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">商品分类*：</label>
                                 <div class="col-sm-8">
@@ -46,24 +76,24 @@
                                 </div>
                             </div>
                             
-                            <%-- <div class="form-group">
+                           <div class="form-group">
                                 <label class="col-sm-3 control-label">商品缩略图*：</label>
                                 <div class="col-sm-8">
                                     <input id="thumbnail" name="thumbnail"  type="hidden"  value="${commodity.thumbnail }"> 
-                                    <!--dom结构部分-->
-									<div id="uploader-demo">
-									    <!--用来存放item-->
-									    <div id="fileList" class="uploader-list"></div>
-									    <div id="filePicker">选择图片</div>
-									</div>
+                                    <input type="hidden" name="img"  id="photoUrl"/>
+                                    <a href="javascript:;" class="file" style="margin-top: 10px">选择图片
+									    <input type="file" name="logoFile" id="logoFile" onchange="setImg(this);" class="file">
+									</a>
+    								<p style="margin-top: -10px;"><img id="photourlShow" src="${commodity.thumbnail }" width="110px" height="110px"/></p>
                                 </div>
-                            </div> --%>
+                            </div> 
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">商品图片*：</label>
                                 <div class="col-sm-8" id="pictureList">
                                     <input id="picture" name="picture"  type="hidden" class="form-control"  value="${commodity.picture }">
                                     <input id="pictureok"  value=""  type="hidden">
+                                    <input id="pictureFlag"  value="0"  type="hidden">
                                     <div id="wrapper">
 								        <div id="container" style="margin-top: 0px;">
 								            <!--头部，相册选择和格式选择-->
@@ -156,6 +186,13 @@
     	   if(pictureok != "" && pictureok!=null){
     		   $("#picture").val(pictureok);
     	   }
+    	   var pictureFlag = $("#pictureFlag").val();
+    	   //alert("pictureFlag:"+pictureFlag)
+    	   if(pictureFlag == "1" ){
+    		   //alert("商品图片有修改，请先上传再保存！");
+    		   toastr.warning("商品图片有修改请先上传");
+    		   return false;
+    	   }
     	   return true;
        }
        
@@ -196,7 +233,8 @@
    	  	 var addId = $("#id").val();
    	  	 if(addId !=null && addId != "" ){
    	  	 	//需要编辑的图片列表
-   	  	var picList = pictureListValue.split(",");
+   	  	 	$("#pictureFlag").val(0);
+   	  		var picList = pictureListValue.split(",");
    			$.each(picList, function(index,item){
    			  	getFileObject(item, function (fileObject) {
    			    var wuFile = new WebUploader.Lib.File(WebUploader.guid('rt_'),fileObject);
@@ -207,33 +245,56 @@
    	  		 
    	  	 }
    		function removeLongche(file){
-	   		var arr = ['a','b','c','d']; 
-	   		arr.splice(1,1); 
-	   		//console.log(arr); 
 	   		
-	   		var picList = new Array();
-	   	 	var pictureListValue2 = $("#picture").val();
-	   	 	//alert(pictureListValue2)
-  	    	picList = pictureListValue2.split(",");
-  	    	var hah =picList[1];
-  	    	var str = file.id
-  	        var falg = str.substr(str.length-1,1)
-  	        if(falg == 0){
-  	        	picList.splice(0,1); 
-  	        }else if(falg == 1 ){
-  	        	picList.splice(1,1); 
-  	        }else if(falg == 2 ){
-  	        	picList.splice(2,1); 
-  	        }else if(falg == 3 ){
-  	        	picList.splice(3,1); 
-  	        }else if(falg == 4 ){
-  	        	picList.splice(4,1); 
-  	        }
-  	    	//alert(picList);
-  	    	$("#picture").val(picList);
+  	    	$("#pictureFlag").val(1);
   	        
   	    
   	    }
+   		//用于进行图片上传，返回地址
+   		function setImg(obj){
+   		    var f=$(obj).val();
+   		    alert(f);
+   		    console.log(obj);
+   		    if(f == null || f ==undefined || f == ''){
+   		        return false;
+   		    }
+   		    if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+   		    {
+   		        alert("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+   		        $(obj).val('');
+   		        return false;
+   		    }
+   		    var data = new FormData();
+   		    console.log(data);
+   		    $.each($(obj)[0].files,function(i,file){
+   		        data.append('file', file);
+   		    });
+   		    console.log(data);
+   		    $.ajax({
+   		        type: "POST",
+   		        url: "<%=basePath%>fileUploaderController/fileupload",
+   		        data: data,
+   		        cache: false,
+   		        contentType: false,    //不可缺
+   		        processData: false,    //不可缺
+   		        dataType:"json",
+   		        success: function(ret) {
+   		            console.log(ret);
+   		            if(ret.code==0){
+   		                    $("#thumbnail").val(ret.filePath);//将地址存储好
+   		                    $("#photourlShow").attr("src",ret.filePath);//显示图片   
+   		                    alertOk(ret.msg);
+   		            }else{
+   		                alertError(ret.msg);
+   		                $("#url").val("");
+   		                $(obj).val('');
+   		            }
+   		        },
+   		        error: function(XMLHttpRequest, textStatus, errorThrown) {
+   		            alert("上传失败，请检查网络后重试");
+   		        }
+   		    });
+   		}
     </script>
     <script src="<%=basePath%>static/webuploader/upload.js"></script>
 </html>

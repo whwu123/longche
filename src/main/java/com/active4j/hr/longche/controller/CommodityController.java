@@ -6,20 +6,31 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
+import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.active4j.hr.activiti.entity.WorkflowMngEntity;
+import com.active4j.hr.common.constant.GlobalConstant;
 import com.active4j.hr.core.annotation.Log;
 import com.active4j.hr.core.beanutil.MyBeanUtils;
 import com.active4j.hr.core.model.AjaxJson;
 import com.active4j.hr.core.model.LogType;
 import com.active4j.hr.core.query.QueryUtils;
 import com.active4j.hr.core.shiro.ShiroUtils;
+import com.active4j.hr.core.util.ListUtils;
 import com.active4j.hr.core.util.ResponseUtil;
 import com.active4j.hr.core.web.tag.model.DataGrid;
 import com.active4j.hr.longche.entity.ArticleEntity;
@@ -32,6 +43,9 @@ import com.active4j.hr.system.model.ActiveUser;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -53,7 +67,10 @@ public class CommodityController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		
+		QueryWrapper<CommodityTypeEntity> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("state", 1);
+		List<CommodityTypeEntity> commodityTypeEntities = commodityTypeService.list(queryWrapper);
+		model.addAttribute("commodityTypeReplace", ListUtils.listToReplaceStr(commodityTypeEntities, "name", "id"));
 		return "longche/commodity/list";
 	}
 
@@ -158,6 +175,44 @@ public class CommodityController {
 			j.setSuccess(false);
 			j.setMsg("删除商品信息错误");
 			e.printStackTrace();
+		}
+		return j;
+	}
+	
+	@RequestMapping(value = "/shangjia/{modelId}")
+	@ResponseBody
+	public AjaxJson shangjia(@PathVariable("modelId") String modelId, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		try {
+			if(modelId!= null && !modelId.isEmpty()) {
+				CommodityEntity commodityEntity = commodityService.getById(modelId);
+				commodityEntity.setState(1);
+				commodityService.saveOrUpdate(commodityEntity);
+				j.setMsg("上架商品成功");;
+			}
+			
+		} catch (Exception e) {
+			j.setSuccess(false);
+			j.setMsg(GlobalConstant.ERROR_MSG);
+			log.error("商品上架状态修改失败，错误信息:{}", e);
+		}
+		return j;
+	}
+	@RequestMapping(value = "/xiajia/{modelId}")
+	@ResponseBody
+	public AjaxJson xiajia(@PathVariable("modelId") String modelId, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		try {
+			if(modelId!= null && !modelId.isEmpty()) {
+				CommodityEntity commodityEntity = commodityService.getById(modelId);
+				commodityEntity.setState(0);
+				commodityService.saveOrUpdate(commodityEntity);
+				j.setMsg("下架商品成功");;
+			}
+		} catch (Exception e) {
+			j.setSuccess(false);
+			j.setMsg(GlobalConstant.ERROR_MSG);
+			log.error("商品下架状态修改失败，错误信息:{}", e);
 		}
 		return j;
 	}

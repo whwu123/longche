@@ -155,12 +155,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                       <%-- <li class="dropdown">
                             <a class="dropdown-toggle count-info J_menuItem6" data-toggle="dropdown" href="oaInfoMailController.do?list" title="收件箱">
                                 <i class="fa fa-envelope"></i> <span class="label label-warning">${noReadNo }</span>
                             </a>
                         </li>
-                        <li class="dropdown">
+                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                 <i class="fa fa-bell"></i> <span class="label label-primary">${totalMsgCount }</span>
                             </a>
@@ -179,10 +179,10 @@
                             <a class="right-sidebar-toggle" aria-expanded="false">
                                 <i class="fa fa-tasks"></i>门户管理
                             </a>
-                        </li>
-                        <!-- <li class="hidden-xs">
+                        </li> 
+                         <li class="hidden-xs">
                            <a href="index_v1.html" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> 主题</a>
-                        </li> -->
+                        </li>--%>
                     </ul>
                 </nav>
             </div>
