@@ -2,6 +2,8 @@ package com.active4j.hr.longche.controller;
 
 
 import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +41,9 @@ public class CommodityController {
 	
 	@Autowired
 	private CommodityService commodityService;
+	
+	@Autowired
+	private CommodityTypeService commodityTypeService;
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -78,6 +83,10 @@ public class CommodityController {
 		ModelAndView view = new ModelAndView("longche/commodity/add");
 		//List<ArticleEntity> list = articleService.list();
 		//view.addObject("list", list);
+		 
+		QueryWrapper<CommodityTypeEntity> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("state", 1);
+		List<CommodityTypeEntity> commodityTypeEntities = commodityTypeService.list(queryWrapper);
 		if(StringUtils.isEmpty(commodityEntity.getId())) {
 			//新增
 			commodityEntity = new CommodityEntity();
@@ -87,6 +96,7 @@ public class CommodityController {
 			commodityEntity = commodityService.getById(commodityEntity.getId());
 			view.addObject("commodity", commodityEntity);
 		}
+		view.addObject("commodityTypeEntities", commodityTypeEntities);
 		return view;
 	}
 	

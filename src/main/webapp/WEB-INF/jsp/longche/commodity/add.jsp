@@ -21,7 +21,14 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">商品分类*：</label>
                                 <div class="col-sm-8">
-                                    <input id="type" name="type"  maxlength="20" type="type" class="form-control" required="" value="${commodity.type }">
+                                   <%--  <input id="type" name="type"  maxlength="20" type="type" class="form-control" required="" value="${commodity.type }"> --%>
+                                	
+                                	<select name="type" class="form-control help-block m-b-none" aria-invalid="false" id="type">
+	                                    <c:forEach var="typeList" items="${commodityTypeEntities }">
+	                                    	<option value="${typeList.id }"  <c:if test="${typeList.id==commodity.type}">selected="selected"</c:if> >${typeList.name }</option>
+	                                    </c:forEach>
+                                    </select>
+                                
                                 </div>
                             </div>
 							
@@ -56,6 +63,7 @@
                                 <label class="col-sm-3 control-label">商品图片*：</label>
                                 <div class="col-sm-8" id="pictureList">
                                     <input id="picture" name="picture"  type="hidden" class="form-control"  value="${commodity.picture }">
+                                    <input id="pictureok"  value=""  type="hidden">
                                     <div id="wrapper">
 								        <div id="container" style="margin-top: 0px;">
 								            <!--头部，相册选择和格式选择-->
@@ -120,7 +128,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">图文详情：</label>
                                 <div class="col-sm-8">
-                                	<input type="hidden" id="particulars" name="particulars" value="${commodity.particulars }">
+                                	
                                     <textarea rows="10" id="editor1" name="editor1" class="form-control">${commodity.particulars }</textarea>
                                     <script>
 						                // Replace the <textarea id="editor1"> with a CKEditor 4
@@ -129,6 +137,7 @@
 						                
 						            </script>
                                 </div>
+                                <textarea style="display: none" id="particulars" name="particulars" >${commodity.particulars }</textarea>
                             </div>
 						</t:formvalid>
                     </div>
@@ -141,8 +150,12 @@
 <script>
        function beforeSubmit(){
     	   var content = CKEDITOR.instances.editor1.getData(); //获取editor1的值
-    	   $("#particulars").val(content)
+    	   $("#particulars").html(content)
     	  // alert(content)
+    	   var  pictureok = $("#pictureok").val();
+    	   if(pictureok != "" && pictureok!=null){
+    		   $("#picture").val(pictureok);
+    	   }
     	   return true;
        }
        
@@ -183,7 +196,7 @@
    	  	 var addId = $("#id").val();
    	  	 if(addId !=null && addId != "" ){
    	  	 	//需要编辑的图片列表
-   			var picList = pictureListValue.split(",");
+   	  	var picList = pictureListValue.split(",");
    			$.each(picList, function(index,item){
    			  	getFileObject(item, function (fileObject) {
    			    var wuFile = new WebUploader.Lib.File(WebUploader.guid('rt_'),fileObject);
@@ -199,20 +212,22 @@
 	   		//console.log(arr); 
 	   		
 	   		var picList = new Array();
-  	    	picList = pictureListValue.split(",");
+	   	 	var pictureListValue2 = $("#picture").val();
+	   	 	//alert(pictureListValue2)
+  	    	picList = pictureListValue2.split(",");
   	    	var hah =picList[1];
   	    	var str = file.id
   	        var falg = str.substr(str.length-1,1)
   	        if(falg == 0){
-  	        	picList.splice(1,1); 
+  	        	picList.splice(0,1); 
   	        }else if(falg == 1 ){
-  	        	picList.splice(2,1); 
+  	        	picList.splice(1,1); 
   	        }else if(falg == 2 ){
-  	        	picList.splice(3,1); 
+  	        	picList.splice(2,1); 
   	        }else if(falg == 3 ){
-  	        	picList.splice(4,1); 
+  	        	picList.splice(3,1); 
   	        }else if(falg == 4 ){
-  	        	picList.splice(5,1); 
+  	        	picList.splice(4,1); 
   	        }
   	    	//alert(picList);
   	    	$("#picture").val(picList);

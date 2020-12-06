@@ -220,9 +220,7 @@
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
-                    '<span class="cancel" οnclick="remove(\''+file.id+'\')">删除</span>' +
-                    '<span class="rotateRight">向右旋转</span>' +
-                    '<span class="rotateLeft">向左旋转</span></div>').appendTo( $li ),
+                    '<span class="cancel")">删除</span>').appendTo( $li ),
                 $prgress = $li.find('p.progress span'),
                 $wrap = $li.find( 'p.imgWrap' ),
                 $info = $('<p class="error"></p>'),
@@ -549,14 +547,14 @@
         });
         uploader.on( 'uploadSuccess', function( file,response) {
            // $( '#'+file.id ).addClass('upload-state-done');
-           var pictureValue = $("#picture").val();
-          // alert("上传成功了:"+response.filePath)
-           if(pictureValue!=null || pictureValue!=""){
-        	   pictureValue = pictureValue+"|"+response.filePath;
-           }else{
+           var pictureValue = $("#pictureok").val();
+           //alert("上传成功了:"+response.filePath)
+           if(pictureValue ==""){
         	   pictureValue = response.filePath;
+           }else{
+        	   pictureValue = pictureValue + ","+response.filePath;
            }
-           $("#picture").val(pictureValue);
+           $("#pictureok").val(pictureValue);
             
         });
         uploader.onError = function( code ) {
