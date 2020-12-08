@@ -2,6 +2,7 @@ package com.active4j.hr.longche.controller;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,8 @@ import com.active4j.hr.core.query.QueryUtils;
 import com.active4j.hr.core.shiro.ShiroUtils;
 import com.active4j.hr.core.util.ResponseUtil;
 import com.active4j.hr.core.web.tag.model.DataGrid;
+import com.active4j.hr.longche.entity.CommodityEntity;
+import com.active4j.hr.longche.entity.CommodityTypeEntity;
 import com.active4j.hr.longche.entity.CouponEntity;
 import com.active4j.hr.longche.entity.MaintenanceEntity;
 import com.active4j.hr.longche.entity.MellSettingEntity;
@@ -84,7 +87,13 @@ public class CouponController {
 		}
 		return view;
 	}
-	
+	@RequestMapping("/update")
+	public ModelAndView update(String id, HttpServletRequest req) {
+		ModelAndView view = new ModelAndView("longche/coupon/sales");
+		CouponEntity couponEntity = couponService.getById(id);
+		view.addObject("coupon", couponEntity);
+		return view;
+	}
 	@RequestMapping("/save")
 	@ResponseBody
 	@Log(type = LogType.save, name = "保存优惠卷信息", memo = "新增或编辑优惠卷信息")

@@ -308,6 +308,34 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>dgUpdOpt</name>
+		<tag-class>com.active4j.hr.core.web.tag.DataGridUpdOptTag</tag-class>
+		<body-content>jsp</body-content>
+		<description>列表修改操作</description>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>列表操作URL</description>
+		</attribute>
+		<attribute>
+			<name>label</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>操作标题</description>
+		</attribute>
+		<attribute>
+			<name>message</name>
+			<rtexprvalue>true</rtexprvalue>
+			<description>询问内容</description>
+		</attribute>
+		<attribute>
+			<name>operationCode</name>
+			<rtexprvalue>true</rtexprvalue>
+			<description>按钮操作Code</description>
+		</attribute>
+	</tag>
+	<tag>
 		<name>dgDefOpt</name>
 		<tag-class>com.active4j.hr.core.web.tag.DataGridDefOptTag</tag-class>
 		<body-content>jsp</body-content>

@@ -168,6 +168,15 @@ public class DataGridTag extends TagSupport {
 		installOperationCode(dataGridUrl, operationCode, urlList);
 	}
 	
+	public void setDefUrl(String url, String label, String message, String operationCode) {
+		DataGridUrl dataGridUrl = new DataGridUrl();
+		dataGridUrl.setUrl(url);
+		dataGridUrl.setLabel(label);
+		dataGridUrl.setMessage(message);
+		dataGridUrl.setType(OptTypeDirection.Deff);
+		installOperationCode(dataGridUrl, operationCode, urlList);
+	}
+	
 	/**
 	 * 设置列表中的操作按钮
 	 * @param label

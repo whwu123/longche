@@ -36,9 +36,11 @@ import com.active4j.hr.core.web.tag.model.DataGrid;
 import com.active4j.hr.longche.entity.ArticleEntity;
 import com.active4j.hr.longche.entity.CommodityEntity;
 import com.active4j.hr.longche.entity.CommodityTypeEntity;
+import com.active4j.hr.longche.entity.CouponEntity;
 import com.active4j.hr.longche.service.ArticleService;
 import com.active4j.hr.longche.service.CommodityService;
 import com.active4j.hr.longche.service.CommodityTypeService;
+import com.active4j.hr.longche.service.CouponService;
 import com.active4j.hr.system.model.ActiveUser;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -58,6 +60,10 @@ public class CommodityController {
 	
 	@Autowired
 	private CommodityTypeService commodityTypeService;
+	
+	@Autowired
+	private CouponService couponService;
+	
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -98,8 +104,11 @@ public class CommodityController {
 	@RequestMapping("/addorupdate")
 	public ModelAndView addorupdate(CommodityEntity commodityEntity, HttpServletRequest req) {
 		ModelAndView view = new ModelAndView("longche/commodity/add");
-		//List<ArticleEntity> list = articleService.list();
-		//view.addObject("list", list);
+		QueryWrapper<CouponEntity> queryWrapperCoupon = new QueryWrapper<>();
+		queryWrapperCoupon.eq("state", 1);
+		
+		List<CouponEntity> couponEntities = couponService.list(queryWrapperCoupon);
+		view.addObject("couponEntities", couponEntities);
 		 
 		QueryWrapper<CommodityTypeEntity> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("state", 1);
@@ -114,6 +123,19 @@ public class CommodityController {
 			view.addObject("commodity", commodityEntity);
 		}
 		view.addObject("commodityTypeEntities", commodityTypeEntities);
+		return view;
+	}
+	
+	@RequestMapping("/update")
+	public ModelAndView update(String id, HttpServletRequest req) {
+		ModelAndView view = new ModelAndView("longche/commodity/add");
+		QueryWrapper<CommodityTypeEntity> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("state", 1);
+		List<CommodityTypeEntity> commodityTypeEntities = commodityTypeService.list(queryWrapper);
+		view.addObject("commodityTypeEntities", commodityTypeEntities);
+		
+		CommodityEntity	commodityEntity = commodityService.getById(id);
+		view.addObject("commodity", commodityEntity);
 		return view;
 	}
 	

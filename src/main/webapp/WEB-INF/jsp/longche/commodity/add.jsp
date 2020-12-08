@@ -151,7 +151,14 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">优惠劵*：</label>
                                 <div class="col-sm-8">
-                                    <input id="couponId" name="couponId"  maxlength="20" type="type" class="form-control" required="" value="${commodity.couponId }">
+                                    <%-- <input id="couponId" name="couponId"  maxlength="20" type="type" class="form-control" required="" value="${commodity.couponId }"> --%>
+                               			
+                              		<select name="couponId" class="form-control help-block m-b-none" aria-invalid="false" id="couponId">
+	                                    <c:forEach var="coupon" items="${couponEntities }">
+	                                    	<option value="${coupon.id }"  <c:if test="${coupon.id==commodity.couponId}">selected="selected"</c:if> >${coupon.name}</option>
+	                                    </c:forEach>
+                                    </select>
+                               
                                 </div>
                             </div>
                             

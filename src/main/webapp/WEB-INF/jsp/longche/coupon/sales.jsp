@@ -14,6 +14,7 @@
 					<div class="ibox-content">
 						<t:formvalid action="coupon/save">
 							<input type="hidden" name="id" id="id" value="${coupon.id }">
+							<input type="hidden" name="state" id="state" value="${coupon.state }">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">优惠卷名称*：</label>
                                 <div class="col-sm-8">
@@ -53,14 +54,14 @@
                                     <input id="number" name="number" type="text"  class="form-control" required="" value="${coupon.number }">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label class="col-sm-3 control-label">加入领劵中心*：</label>
                                 <div class="col-sm-8">
                                    <%--  <t:dictSelect name="isJoin" type="radio" typeGroupCode="byesorno" defaultVal="false"></t:dictSelect> --%>
                                 
                                 	<c:choose>
                                 		<c:when test="${empty coupon.isJoin}">
-                                			<t:dictSelect name="isJoin" type="radio" typeGroupCode="byesorno" defaultVal="false"></t:dictSelect>
+                                			<t:dictSelect name="isJoin" type="radio" typeGroupCode="byesorno" defaultVal="true"></t:dictSelect>
                                 		</c:when>
                                 		<c:otherwise>
                                 			<t:dictSelect name="isJoin" type="radio" typeGroupCode="byesorno" defaultVal="${coupon.isJoin}"></t:dictSelect>

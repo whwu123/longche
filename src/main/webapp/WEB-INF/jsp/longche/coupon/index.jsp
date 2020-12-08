@@ -33,14 +33,18 @@
 		<t:dgCol name="preferentialWay" label="优惠方式" width="90" replace="时间_1,数量_0"></t:dgCol>
 		<t:dgCol name="validTime" label="有效时间" width="60" ></t:dgCol>
 		<t:dgCol name="number" label="数量" width="60" ></t:dgCol>
-		<t:dgCol name="isJoin" label="加入领券中心" width="60" replace="加入_true,未加入_false"></t:dgCol>
+		<%-- <t:dgCol name="isJoin" label="加入领券中心" width="60" replace="加入_true,未加入_false"></t:dgCol> --%>
 		<t:dgCol name="opt" label="操作" width="100"></t:dgCol>
 		<t:dgDelOpt label="删除" url="coupon/del?id={id}" operationCode="sys:user:del"/>
+	<%-- 	<t:dgFunOpt label="编辑" funName="update(id)" icon="fa fa-binoculars"></t:dgFunOpt> --%>
 		<t:dgToolBar url="coupon/addorupdate" type="add" width="50%" height="60%" operationCode="sys:user:add"></t:dgToolBar>
 		<t:dgToolBar url="coupon/addorupdate" type="edit" width="50%" height="60%" operationCode="sys:user:edit"></t:dgToolBar>
+		<t:dgToolBar url="coupon/addorupdate" type="view" width="50%" height="60%" operationCode="sys:user:view"></t:dgToolBar>
 	</t:datagrid>
 <script type="text/javascript">
-		
+		function update(id){
+			window.open("coupon/update?id="+id,"_blank");    
+		}
 </script>
 </body>
 </html>
