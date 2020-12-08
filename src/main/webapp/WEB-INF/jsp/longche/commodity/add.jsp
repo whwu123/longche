@@ -131,6 +131,8 @@
                                 <label class="col-sm-3 control-label">规格*：</label>
                                 <div class="col-sm-8">
                                     <input id="specification" name="specification"  maxlength="20" type="type" class="form-control" required="" value="${commodity.specification }">
+                                    <input name="specification"  maxlength="20" type="type" class="form-control" required="" value="">
+                                	<a onclick="addSpecification()">新增一列规格+</a>
                                 </div>
                             </div>
                             
@@ -185,6 +187,10 @@
 </body>
 
 <script>
+	   function addSpecification(){
+		   alert("新增")
+		   
+	   }
        function beforeSubmit(){
     	   var content = CKEDITOR.instances.editor1.getData(); //获取editor1的值
     	   $("#particulars").html(content)
