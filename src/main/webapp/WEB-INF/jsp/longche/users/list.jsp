@@ -28,15 +28,15 @@
 	<t:datagrid actionUrl="userslc/datagrid" tableContentId="jqGrid_wrapper" searchGroupId="searchGroupId" fit="true" caption="用户管理" name="table_list_2" pageSize="20" sortName="createDate" sortOrder="desc">
 		<t:dgCol name="id" label="编号" hidden="true" key="true" width="20"></t:dgCol>
 		<t:dgCol name="name" label="昵称"  width="90"> ></t:dgCol>
-		<t:dgCol name="address" label="OpenId" width="90"></t:dgCol>
+		<t:dgCol name="openId" label="OpenId" width="90"></t:dgCol>
 		<t:dgCol name="department" label="所属平台" width="60"></t:dgCol>
-		<t:dgCol name="phone" label="手机号码" width="80" replace="公司简介_1,分销简介_0"></t:dgCol>
-		<t:dgCol name="remark" label="备注" replace="正常_1,禁用_0" width="60"></t:dgCol>
-		<t:dgCol name="rank" label="身份" replace="正常_1,禁用_0" width="60"></t:dgCol>
-		<t:dgCol name="orderNum" label="订单数" replace="正常_1,禁用_0" width="60"></t:dgCol>
-		<t:dgCol name="couponNum" label="卡劵数" replace="正常_1,禁用_0" width="60"></t:dgCol>
-		<t:dgCol name="integral" label="当前积分" replace="正常_1,禁用_0" width="60"></t:dgCol>
-		<t:dgCol name="balance" label="当前余额" replace="正常_1,禁用_0" width="60"></t:dgCol>
+		<t:dgCol name="phone" label="手机号码" width="80"  ></t:dgCol>
+		<t:dgCol name="remark" label="备注"   width="60"></t:dgCol>
+		<t:dgCol name="rank" label="身份"   width="60" ></t:dgCol>
+		<t:dgCol name="orderNum" label="订单数"  width="60"></t:dgCol>
+		<t:dgCol name="couponNum" label="卡劵数"   width="60"></t:dgCol>
+		<t:dgCol name="integral" label="当前积分"   width="60"></t:dgCol>
+		<t:dgCol name="balance" label="当前余额"   width="60"></t:dgCol>
 		<t:dgCol name="opt" label="操作" width="100"></t:dgCol>
 		<t:dgDelOpt label="删除" url="article/del?id={id}" operationCode="sys:user:del"/>
 		<t:dgToolBar url="article/addorupdate" type="add" width="60%" height="80%" operationCode="sys:user:add"></t:dgToolBar>
