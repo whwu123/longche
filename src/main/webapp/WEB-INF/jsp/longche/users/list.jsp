@@ -4,6 +4,12 @@
 <html>
 <head>
 <t:base type="default,select2,jqgrid"></t:base>
+<style type="text/css">
+.rankClass{
+background-color: #23c6c8;
+color: #FFF
+}
+</style>
 </head>
 <body class="gray-bg">
 	<!-- 页面部分 -->
@@ -31,7 +37,7 @@
 		<t:dgCol name="openId" label="OpenId" width="90"></t:dgCol>
 		<t:dgCol name="department" label="所属平台" width="60"></t:dgCol>
 		<t:dgCol name="phone" label="手机号码" width="80"  ></t:dgCol>
-		<t:dgCol name="remark" label="备注"   width="60"></t:dgCol>
+		<t:dgCol name="remark" label="备注"   width="60" ></t:dgCol>
 		<t:dgCol name="rank" label="身份"   width="60" ></t:dgCol>
 		<t:dgCol name="orderNum" label="订单数"  width="60"></t:dgCol>
 		<t:dgCol name="couponNum" label="卡劵数"   width="60"></t:dgCol>
