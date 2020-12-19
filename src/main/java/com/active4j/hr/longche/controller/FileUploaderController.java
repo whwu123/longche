@@ -66,10 +66,10 @@ public class FileUploaderController {
 			out.println("</script>");
 			return null;
 		}
-		if (upload.getSize() > 600 * 1024) {
+		if (upload.getSize() > 10000 * 1024) {
 			out.println("<script type=\"text/javascript\">");
 			out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
-					+ ",''," + "'文件大小不得大于600k');");
+					+ ",''," + "'文件大小不得大于10MB');");
 			out.println("</script>");
 			return null;
 		}

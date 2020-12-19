@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">维修厂电话*：</label>
                                 <div class="col-sm-8">
-                                    <input id="phone" name="phone" minlength="2" maxlength="11" type="text" class="form-control" required="" value="${maintenance.phone }">
+                                    <input id="phone" name="phone"  type="text" class="form-control" required="" value="${maintenance.phone }">
                                 </div>
                             </div>
                             <div class="form-group">

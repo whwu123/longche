@@ -5,7 +5,6 @@
 <head>
 <t:base type="default,select2,icheck"></t:base>
 <script src="<%=basePath%>static/ckeditor/ckeditor.js"></script>
-
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -22,10 +21,10 @@
                                     <input id="name" name="name"  minlength="2" maxlength="50" type="text" class="form-control" required="" value="${article.name }">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%-- <div class="form-group">
                                 <label class="col-sm-3 control-label">类型：</label>
                                 <div class="col-sm-8">
-                                    <%-- <input id="type" name="type" type="text"  minlength="2" class="form-control"   value="${article.type }"> --%>
+                                    <input id="type" name="type" type="text"  minlength="2" class="form-control"   value="${article.type }">
                                     <select name="type" class="form-control help-block m-b-none" aria-invalid="false" id="type">
 	                                    <option value="0"  <c:if test="${article.type==0}">selected="selected"</c:if> >公司简介</option>
 	                                    <option value="1"  <c:if test="${article.type==1}">selected="selected"</c:if> >分销简介</option>
@@ -44,7 +43,7 @@
                                 <div class="col-sm-8">
                                     <input id="address" name="address" type="text"  minlength="2" class="form-control"   value="${article.address }">
                                 </div>
-                            </div>
+                            </div> --%>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">内容：</label>
                                 <div class="col-sm-8">

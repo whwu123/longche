@@ -57,4 +57,7 @@ public class CommodityEntity extends BaseEntity{
 	
 	@TableField("cartype_id")
 	private String cartypeId;
+	
+	@TableField("gongli_number")
+	private int gongliNumber;
 }

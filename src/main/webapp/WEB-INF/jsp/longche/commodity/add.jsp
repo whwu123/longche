@@ -131,8 +131,8 @@
                                 <label class="col-sm-3 control-label">规格*：</label>
                                 <div class="col-sm-8">
                                     <input id="specification" name="specification"  maxlength="20" type="type" class="form-control" required="" value="${commodity.specification }">
-                                    <input name="specification"  maxlength="20" type="type" class="form-control" required="" value="">
-                                	<a onclick="addSpecification()">新增一列规格+</a>
+                                    <!-- <input name="specification"  maxlength="20" type="type" class="form-control" required="" value="">
+                                	<a onclick="addSpecification()">新增一列规格+</a> -->
                                 </div>
                             </div>
                             
@@ -164,6 +164,15 @@
                                 </div>
                             </div>
                             
+                             <div class="form-group">
+                                <label class="col-sm-3 control-label">使用里程*：</label>
+                                <div class="col-sm-8">
+                                    <select name="gongliNumber" class="form-control help-block m-b-none" aria-invalid="false" id="gongliNumber">
+	                                    	<option value="1"  <c:if test="${commodity.gongliNumber ==1}">selected="selected"</c:if> >10W公里内</option>
+	                                    	<option value="2"  <c:if test="${commodity.gongliNumber ==2}">selected="selected"</c:if> >10W公里外</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">图文详情：</label>
                                 <div class="col-sm-8">
@@ -266,7 +275,7 @@
    		//用于进行图片上传，返回地址
    		function setImg(obj){
    		    var f=$(obj).val();
-   		    alert(f);
+   		    //alert(f);
    		    console.log(obj);
    		    if(f == null || f ==undefined || f == ''){
    		        return false;
@@ -292,7 +301,7 @@
    		        processData: false,    //不可缺
    		        dataType:"json",
    		        success: function(ret) {
-   		            console.log(ret);
+   		           // console.log(ret);
    		            if(ret.code==0){
    		                    $("#thumbnail").val(ret.filePath);//将地址存储好
    		                    $("#photourlShow").attr("src",ret.filePath);//显示图片   
