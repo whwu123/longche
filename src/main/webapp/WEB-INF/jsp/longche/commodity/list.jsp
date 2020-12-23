@@ -30,7 +30,6 @@
 		<t:dgCol name="type" label="类型"  width="60" replace="${commodityTypeReplace }" valueId="type"></t:dgCol>
 		<t:dgCol name="name" label="名称"  width="180"></t:dgCol>
 		<t:dgCol name="thumbnail" label="缩略图"  width="120" imageSize="100,100" image="true" ></t:dgCol>
-		<t:dgCol name="price" label="售价"  width="60"></t:dgCol>
 		<t:dgCol name="repertory" label="库存"  width="60"></t:dgCol>
 		<t:dgCol name="state" label="状态" replace="已上架_1,未上架_0" width="90" display="zeroOrOne"></t:dgCol>
 		<t:dgCol name="sales" label="已出售量"  width="60"></t:dgCol>
