@@ -128,14 +128,20 @@
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">规格*：</label>
-                                <div class="col-sm-8">
-                                    <input id="specification" name="specification"  maxlength="20" type="type" class="form-control" required="" value="${commodity.specification }">
-                                    <!-- <input name="specification"  maxlength="20" type="type" class="form-control" required="" value="">
-                                	<a onclick="addSpecification()">新增一列规格+</a> -->
+                                <label class="col-sm-3 control-label">规格价格*：</label>
+                                <div class="col-sm-8" id="ggjgDiv">
+                                	<a onclick="addSpecification()">新增一列+</a>
+                                    <input id="specification" name="specification"  placeholder="前面填规格，后台填价格。格式要：guige:jiage" type="type" class="form-control" required="" value="${commodity.specification }" >
                                 </div>
                             </div>
                             
+                            <%-- <div class="form-group">
+                                <label class="col-sm-3 control-label">价格*：</label>
+                                <div class="col-sm-8">
+                                    <input id="price" name="price"    type="type" class="form-control" required="" value="${commodity.price }">
+                                </div>
+                            </div>
+                             --%>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">库存*：</label>
                                 <div class="col-sm-8">
@@ -143,12 +149,7 @@
                                 </div>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">价格*：</label>
-                                <div class="col-sm-8">
-                                    <input id="price" name="price"    type="type" class="form-control" required="" value="${commodity.price }">
-                                </div>
-                            </div>
+                           
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">优惠劵*：</label>
@@ -197,7 +198,8 @@
 
 <script>
 	   function addSpecification(){
-		   alert("新增")
+			//		   alert("新增")
+		   $("#ggjgDiv").append(" <input  name=\"specification\"  type=\"text\" class=\"form-control\"  placeholder=\"前面填规格，后台填价格。格式要：guige:jiage\"/> ");
 		   
 	   }
        function beforeSubmit(){

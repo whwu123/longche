@@ -51,7 +51,7 @@
                             <div class="form-group" id="yhNumber" >
                                 <label class="col-sm-3 control-label">数量*：</label>
                                 <div class="col-sm-8">
-                                    <input id="number" name="number" type="text"  class="form-control" required="" value="${coupon.number }">
+                                    <input id="number" name="number" type="number" placeholder="数量0是无限制"  class="form-control"  required="" value="${coupon.number }" >
                                 </div>
                             </div>
                             <div class="form-group" style="display: none">

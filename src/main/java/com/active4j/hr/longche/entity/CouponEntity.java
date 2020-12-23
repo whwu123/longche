@@ -29,13 +29,13 @@ public class CouponEntity extends BaseEntity{
 	private String lowConsumption;
 	
 	@TableField("valid_time")
-	private int validTime;
+	private Integer validTime;
 	
 	@TableField("number")
-	private int number;
+	private Integer number;
 	
 	@TableField("preferential_way")
-	private int preferentialWay;
+	private Integer preferentialWay;
 	
 	@TableField("is_join")
 	private String isJoin;
